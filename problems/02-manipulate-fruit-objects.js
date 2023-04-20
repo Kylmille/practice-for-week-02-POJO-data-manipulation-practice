@@ -1,3 +1,21 @@
+const fruits = [        // large array of 31 different fruits
+    {                       // each fruit represented by an object
+        "genus": "Malus",
+        "name": "Apple",
+        "id": 6,
+        "family": "Rosaceae",
+        "order": "Rosales",
+        "nutritions": {         // nested object contains nutrition information
+            "carbohydrates": 11.4,
+            "protein": 0.3,
+            "fat": 0.4,
+            "calories": 52,
+            "sugar": 10.3
+        }
+    },
+    // ...followed by 30 more fruit objects with the same structure
+];
+
 /**************DO NOT MODIFY THIS LINE BELOW*****************/
 const fruits = require('../fruit-data')
 
@@ -9,8 +27,15 @@ console.log(addKeyAndValueToAll(fruits, "inStock", true));
 */
 
 function addKeyAndValueToAll(array, key, value) {
-    // Your code here
-}
+    const updatedFruits = fruits.map(fruit => {
+        return {
+          ...fruit,
+          [key]: value
+        };
+      });
+      return updatedFruits;
+    }
+    console.log(addKeyAndValueToAll(fruits, "inStock", true));
 
 /* 08. `addKeyAndValueToOne()` - Return object at the given index array, adding the given key and
 value to that fruit object
@@ -20,9 +45,17 @@ console.log(addKeyAndValueToOne(fruits, "color", "red", 1));
 */
 
 function addKeyAndValueToOne(array, key, value, index) {
-    // Your code here
-}
+    const updatedFruits = [...fruits];
+    if (updatedFruits[index]) {
+      updatedFruits[index] = {
+        ...updatedFruits[index],
+        [key]: value
+      };
+    }
+    return updatedFruits;
+  }
 
+  console.log(addKeyAndValueToOne(fruits, "color", "red", 1));
 /* 09. `updateKeyName()` - Change the old key name to the new key name in all
 objects, and return the resulting array.
 HINT: Can you make a copy of the old key and value, and then delete the original?
@@ -32,9 +65,16 @@ console.log(updateKeyName(fruits, "nutritions", "nutrition"));
 */
 
 function updateKeyName(array, oldKey, newKey) {
-    // Your code here
+    const updatedFruits = fruits.map(fruit => {
+        if (fruit.hasOwnProperty(oldKeyName)) {
+          fruit[newKeyName] = fruit[oldKeyName];
+          delete fruit[oldKeyName];
+        }
+        return fruit;
+      });
+      return updatedFruits;
 }
-
+console.log(updateKeyName(fruits, "nutritions", "nutrition"))
 /* 10. `updateIdValues()` - Change all of the "id" values to six-character
 strings, and return an array of all of the new id values.
 For example: 1 becomes "000001", and 31 becomes "000031"
@@ -49,9 +89,15 @@ console.log(updateIdValues(fruits));
 */
 
 function updateIdValues(array) {
-    // Your code here
-}
+    const newIds = fruits.map((fruit) => {
+        const idString = fruit.id.toString().padStart(6, "0");
+        fruit.id = idString;
+        return idString;
+      });
+      return newIds;
+    }
 
+    console.log(updateIdValues(fruits)
 /* 11. `deleteKeysandValues()` - Delete the keyToDelete from the nutritions
 object from every fruit, and return the array.
 
@@ -60,9 +106,15 @@ console.log(deleteKeysAndValues(fruits, "sugar"));
 */
 
 function deleteKeysAndValues(array, keyToDelete) {
-    // Your code here
-}
 
+    fruits.forEach(fruit => {
+        if (fruit.nutritions && fruit.nutritions.hasOwnProperty(keyToDelete)) {
+          delete fruit.nutritions[keyToDelete];
+        }
+      });
+      return fruits;
+}
+console.log(deleteKeysAndValues(fruits, "sugar"));
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
 
 module.exports = [ addKeyAndValueToAll, addKeyAndValueToOne, updateKeyName, updateIdValues, deleteKeysAndValues ];
