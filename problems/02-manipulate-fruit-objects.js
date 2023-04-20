@@ -97,7 +97,7 @@ function updateIdValues(array) {
       return newIds;
     }
 
-    console.log(updateIdValues(fruits)
+    console.log(updateIdValues(fruits))
 /* 11. `deleteKeysandValues()` - Delete the keyToDelete from the nutritions
 object from every fruit, and return the array.
 
