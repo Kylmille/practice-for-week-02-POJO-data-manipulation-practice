@@ -89,10 +89,8 @@ function getFruitKeys(fruits) {
     const keys = [];
 
     if (fruits.length > 0) {
-      // Use the keys of the first fruit to create list of keys
       keys.push(...Object.keys(fruits[0]));
     }
-
     return keys;
 }
 
