@@ -1,4 +1,4 @@
-const fruits = [        // large array of 31 different fruits
+/*const fruits = [        // large array of 31 different fruits
     {                       // each fruit represented by an object
         "genus": "Malus",
         "name": "Apple",
@@ -65,15 +65,16 @@ console.log(updateKeyName(fruits, "nutritions", "nutrition"));
 */
 
 function updateKeyName(array, oldKey, newKey) {
-    const updatedFruits = fruits.map(fruit => {
-        if (fruit.hasOwnProperty(oldKeyName)) {
-          fruit[newKeyName] = fruit[oldKeyName];
-          delete fruit[oldKeyName];
-        }
-        return fruit;
-      });
-      return updatedFruits;
-}
+    const updatedFruits = array.map(item => {
+      if (item.hasOwnProperty(oldKey)) {
+        item[newKey] = item[oldKey];
+        delete item[oldKey];
+      }
+      return item;
+    });
+    return updatedFruits;
+  }
+
 console.log(updateKeyName(fruits, "nutritions", "nutrition"))
 /* 10. `updateIdValues()` - Change all of the "id" values to six-character
 strings, and return an array of all of the new id values.
